@@ -1,6 +1,8 @@
 # PhoneBook app
 
-![](https://img.shields.io/badge/Version-1.0.0-green?logo=csharp)<br />
+![](https://img.shields.io/badge/Version-1.0.0-green?logo=csharp)<br /><br />
+![](https://github.com/solracss/Phonebook/blob/master/img/phone-book.png)<br />
+
 Simple console app created with C# for training my basic programming skils I've learned so far doing online course.
 
 ## Overview
