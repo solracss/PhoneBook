@@ -16,6 +16,6 @@ A `contact` is a entity that consist `name` and `phone number`.<br />
 Application allows user to:
 
 - Add new contact
-- Display name of the contact when given it's numner
+- Display name of the contact when given it's number
 - Display all contacts
-- Search a number for provided contact name
+- Search contacts for a given name
