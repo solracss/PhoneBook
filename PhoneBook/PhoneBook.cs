@@ -15,22 +15,22 @@
             }
         }
 
-        public void ShowContactNameForProvidedNumber(string contactNumber)
+        public void ShowContactNameForProvidedNumber(string number)
         {
-            Contact contact = null;
-
-            if (contactNumber == string.Empty)
+            if (string.IsNullOrEmpty(number))
             {
                 Console.WriteLine("Please provide number");
+                return;
             }
-            else if (Contacts.TryGetValue(contactNumber, out contact))
-            {
-                Console.WriteLine($"Contact name for number {contactNumber} is {contact.Name}");
-            }
-            else
+
+            var contact = Contacts.FirstOrDefault(c => c.Key == number);
+            if (contact.Key == null)
             {
                 Console.WriteLine("No contact for the given number");
+                return;
             }
+
+            Console.WriteLine($"Contact name for number {number} is {contact.Value.Name}");
         }
 
         public void ShowNumberForContact(string contactName)
