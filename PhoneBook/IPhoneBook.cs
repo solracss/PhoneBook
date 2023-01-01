@@ -8,6 +8,6 @@
 
         void ShowNumberForContact(string contactName);
 
-        void ShowContactName(string contactName);
+        void ShowContactNameForProvidedNumber(string contactNumber);
     }
 }
