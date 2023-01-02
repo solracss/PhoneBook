@@ -23,6 +23,7 @@
             if (Contacts.Count == 0)
             {
                 Console.WriteLine("Phonebook is empty");
+                Console.WriteLine();
             }
             else
             {
@@ -38,6 +39,7 @@
             if (string.IsNullOrEmpty(number))
             {
                 Console.WriteLine("Please provide number");
+                Console.WriteLine();
                 return;
             }
 
@@ -45,10 +47,12 @@
             if (contact.Key == null)
             {
                 Console.WriteLine("No contact for the given number");
+                Console.WriteLine();
                 return;
             }
 
             Console.WriteLine($"Contact name for number {number} is {contact.Value.Name}");
+            Console.WriteLine();
         }
 
         public void ShowNumberForContact(string contactName)
@@ -56,6 +60,7 @@
             if (string.IsNullOrEmpty(contactName))
             {
                 Console.WriteLine("Please provide name");
+                Console.WriteLine();
                 return;
             }
 
@@ -63,12 +68,14 @@
             foreach (var contact in Contacts.Where(c => c.Value.Name == contactName))
             {
                 Console.WriteLine($"Phone number for {contactName} is {contact.Key}");
+                Console.WriteLine();
                 notFound = false;
             }
 
             if (notFound)
             {
                 Console.WriteLine($"No contact for {contactName}");
+                Console.WriteLine();
             }
         }
     }
