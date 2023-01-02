@@ -4,9 +4,15 @@ namespace PhoneBook
 {
     internal class PhoneBook : IPhoneBook
     {
-        public Dictionary<string, Contact> Contacts = new Dictionary<string, Contact>()
+        private Dictionary<string, Contact> _contacts = new Dictionary<string, Contact>()
         {
         };
+
+        public Dictionary<string, Contact> Contacts
+        {
+            get { return _contacts; }
+            set { _contacts = value; }
+        }
 
         public void AddContact(string name, string phoneNumber)
         {
