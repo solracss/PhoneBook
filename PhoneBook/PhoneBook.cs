@@ -1,10 +1,17 @@
-﻿namespace PhoneBook
+﻿using System.Xml.Linq;
+
+namespace PhoneBook
 {
     internal class PhoneBook : IPhoneBook
     {
-        public void AddContact(string number, Contact contact)
+        public Dictionary<string, Contact> Contacts = new Dictionary<string, Contact>()
         {
-            Contacts.Add(number, contact);
+        };
+
+        public void AddContact(string name, string phoneNumber)
+        {
+            var newContact = new Contact(name, phoneNumber);
+            Contacts.Add(phoneNumber, newContact);
         }
 
         public void ShowAllContacts()

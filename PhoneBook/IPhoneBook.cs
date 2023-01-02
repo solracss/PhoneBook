@@ -1,10 +1,12 @@
-﻿namespace PhoneBook
+﻿using System.Xml.Linq;
+
+namespace PhoneBook
 {
     internal interface IPhoneBook
     {
         void ShowAllContacts();
 
-        void AddContact(string number, Contact contact);
+        void AddContact(string name, string phoneNumber);
 
         void ShowNumberForContact(string contactName);
 
