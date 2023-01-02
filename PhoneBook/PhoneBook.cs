@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace PhoneBook
+﻿namespace PhoneBook
 {
     internal class PhoneBook : IPhoneBook
     {
@@ -22,9 +20,16 @@ namespace PhoneBook
 
         public void ShowAllContacts()
         {
-            foreach (var contact in Contacts)
+            if (Contacts.Count == 0)
             {
-                Console.WriteLine($"{contact.Value.Name} {contact.Value.PhoneNumber}");
+                Console.WriteLine("Phonebook is empty");
+            }
+            else
+            {
+                foreach (var contact in Contacts)
+                {
+                    Console.WriteLine($"{contact.Value.Name} {contact.Value.PhoneNumber}");
+                }
             }
         }
 
