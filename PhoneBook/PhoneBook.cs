@@ -15,7 +15,7 @@
         public void AddContact()
         {
             Console.Clear();
-            Console.WriteLine("Adding new contact");
+            Console.WriteLine("Adding new contact\n");
             var name = UserInterface.AskForName();
             var phoneNumber = UserInterface.AskForNumber();
             var newContact = new Contact(name, phoneNumber);
@@ -58,8 +58,8 @@
                 return;
             }
 
-            Console.WriteLine($"Contact name for number {number} is {contact.Value.Name}");
-            Console.WriteLine();
+            Console.WriteLine($"\nContact name for number {number} is {contact.Value.Name}");
+            ReturnToMainMenu();
         }
 
         public void ShowNumberForContact()
@@ -71,13 +71,13 @@
             bool notFound = true;
             foreach (var contact in Contacts.Where(c => c.Value.Name == contactName))
             {
-                Console.WriteLine($"\nPhone number for {contactName} is {contact.Key}\n");
+                Console.WriteLine($"\nPhone number for {contactName} is {contact.Key}");
                 notFound = false;
             }
 
             if (notFound)
             {
-                Console.WriteLine($"\nNo contact for {contactName}\n");
+                Console.WriteLine($"\nNo contact for {contactName}");
             }
 
             ReturnToMainMenu();
