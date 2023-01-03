@@ -10,8 +10,7 @@
             Console.WriteLine("2: Show all contacts");
             Console.WriteLine("3: Show number for contact");
             Console.WriteLine("4: Show contact name for number");
-            Console.WriteLine("5: Clear screen");
-            Console.WriteLine("6: Exit Application");
+            Console.WriteLine("5: Exit Application");
             Console.WriteLine();
             Console.Write("Choose your action: ");
         }
