@@ -26,6 +26,8 @@
 
         public void ShowAllContacts()
         {
+            Console.Clear();
+            Console.WriteLine("List of contacts in phonebook\n");
             if (Contacts.Count == 0)
             {
                 Console.WriteLine("Phonebook is empty");
@@ -38,6 +40,8 @@
                     Console.WriteLine($"{contact.Value.Name} {contact.Value.PhoneNumber}");
                 }
             }
+
+            ReturnToMainMenu();
         }
 
         public void ShowContactNameForProvidedNumber(string number)
