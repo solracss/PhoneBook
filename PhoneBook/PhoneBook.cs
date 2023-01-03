@@ -15,29 +15,30 @@
         public void AddContact()
         {
             Console.Clear();
-            Console.WriteLine("Adding new contact\n");
+            Console.WriteLine(" ***** Adding new contact *****\n");
             var name = UserInterface.AskForName();
             var phoneNumber = UserInterface.AskForNumber();
             var newContact = new Contact(name, phoneNumber);
             Contacts.Add(phoneNumber, newContact);
-            Console.WriteLine($"\nNew contact is {name} with number {phoneNumber}");
+            Console.WriteLine($"\n New contact is \"{name}\" with number \"{phoneNumber}\"");
             ReturnToMainMenu();
         }
 
         public void ShowAllContacts()
         {
             Console.Clear();
-            Console.WriteLine("List of contacts in phonebook\n");
+            Console.WriteLine(" *****List of contacts in phonebook *****\n");
             if (Contacts.Count == 0)
             {
-                Console.WriteLine("Phonebook is empty");
-                Console.WriteLine();
+                Console.WriteLine(" Phonebook is empty");
             }
             else
             {
+                var i = 1;
                 foreach (var contact in Contacts)
                 {
-                    Console.WriteLine($"{contact.Value.Name} {contact.Value.PhoneNumber}");
+                    Console.WriteLine($" {i}.\t{contact.Value.Name} {contact.Value.PhoneNumber}");
+                    i++;
                 }
             }
 
@@ -47,37 +48,37 @@
         public void ShowContactNameForProvidedNumber()
         {
             Console.Clear();
-            Console.WriteLine("Searching for name\n");
+            Console.WriteLine(" ***** Searching for name *****\n");
             var number = HandleEmptyInput(UserInterface.AskForNumber);
 
             var contact = Contacts.FirstOrDefault(c => c.Key == number);
             if (contact.Key == null)
             {
-                Console.WriteLine("\nNo contact for the given number");
+                Console.WriteLine("\n No contact for the given number");
                 ReturnToMainMenu();
                 return;
             }
 
-            Console.WriteLine($"\nContact name for number {number} is {contact.Value.Name}");
+            Console.WriteLine($"\n Contact name for number \"{number}\" is \"{contact.Value.Name}\"");
             ReturnToMainMenu();
         }
 
         public void ShowNumberForContact()
         {
             Console.Clear();
-            Console.WriteLine("Searching for contact\n");
+            Console.WriteLine(" ***** Searching for contact *****\n");
             var contactName = HandleEmptyInput(UserInterface.AskForName);
 
             bool notFound = true;
             foreach (var contact in Contacts.Where(c => c.Value.Name == contactName))
             {
-                Console.WriteLine($"\nPhone number for {contactName} is {contact.Key}");
+                Console.WriteLine($"\n Phone number for \"{contactName}\" is \"{contact.Key}\"");
                 notFound = false;
             }
 
             if (notFound)
             {
-                Console.WriteLine($"\nNo contact for {contactName}");
+                Console.WriteLine($"\n No contact for \"{contactName}\"");
             }
 
             ReturnToMainMenu();
@@ -96,7 +97,7 @@
 
         public static void ReturnToMainMenu()
         {
-            Console.Write("\r\nPress any key to return to Main Menu");
+            Console.Write("\n Press any key to return to Main Menu...");
             Console.ReadKey();
         }
 
