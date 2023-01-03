@@ -66,11 +66,7 @@
         {
             Console.Clear();
             Console.WriteLine("Searching for contact\n");
-            var contactName = string.Empty;
-            while (string.IsNullOrEmpty(contactName))
-            {
-                contactName = UserInterface.AskForName();
-            }
+            var contactName = HandleEmptyInput(UserInterface.AskForName);
 
             bool notFound = true;
             foreach (var contact in Contacts.Where(c => c.Value.Name == contactName))
@@ -85,6 +81,17 @@
             }
 
             ReturnToMainMenu();
+        }
+
+        private static string HandleEmptyInput(Func<string> askForInput)
+        {
+            var str = string.Empty;
+            while (string.IsNullOrEmpty(str))
+            {
+                str = askForInput();
+            }
+
+            return str;
         }
 
         public static void ReturnToMainMenu()
