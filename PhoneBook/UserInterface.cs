@@ -4,6 +4,7 @@
     {
         internal static void ShowMainMenu()
         {
+            Console.Clear();
             Console.WriteLine("MENU");
             Console.WriteLine("1: Add new contact");
             Console.WriteLine("2: Show all contacts");
@@ -35,7 +36,7 @@
         internal static void InvalidOperationMessage()
         {
             Console.WriteLine("Invalid operation");
-            Console.WriteLine();
+            PhoneBook.ReturnToMainMenu();
         }
     }
 }
