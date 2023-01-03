@@ -6,7 +6,7 @@ namespace PhoneBook
     {
         void ShowAllContacts();
 
-        void AddContact(string name, string phoneNumber);
+        void AddContact();
 
         void ShowNumberForContact(string contactName);
 

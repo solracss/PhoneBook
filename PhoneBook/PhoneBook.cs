@@ -12,10 +12,16 @@
             set { _contacts = value; }
         }
 
-        public void AddContact(string name, string phoneNumber)
+        public void AddContact()
         {
+            Console.Clear();
+            Console.WriteLine("Adding new contact");
+            var name = UserInterface.AskForname();
+            var phoneNumber = UserInterface.AskForNumber();
             var newContact = new Contact(name, phoneNumber);
             Contacts.Add(phoneNumber, newContact);
+            Console.WriteLine($"\nNew contact is {name} with number {phoneNumber}");
+            ReturnToMainMenu();
         }
 
         public void ShowAllContacts()
@@ -67,8 +73,7 @@
             bool notFound = true;
             foreach (var contact in Contacts.Where(c => c.Value.Name == contactName))
             {
-                Console.WriteLine($"Phone number for {contactName} is {contact.Key}");
-                Console.WriteLine();
+                Console.WriteLine($"Phone number for {contactName} is {contact.Key}\n");
                 notFound = false;
             }
 
@@ -76,6 +81,46 @@
             {
                 Console.WriteLine($"No contact for {contactName}");
                 Console.WriteLine();
+            }
+        }
+
+        public static void ReturnToMainMenu()
+        {
+            Console.Write("\r\nPress any key to return to Main Menu");
+            Console.ReadKey();
+        }
+
+        public void Run(string userInput)
+        {
+            switch (userInput)
+            {
+                case "1":
+                    AddContact();
+                    break;
+
+                case "2":
+                    ShowAllContacts();
+                    break;
+
+                case "3":
+                    ShowNumberForContact(UserInterface.AskForNumber());
+                    break;
+
+                case "4":
+                    ShowContactNameForProvidedNumber(UserInterface.AskForNumber());
+                    break;
+
+                case "5":
+                    UserInterface.ClearScreen();
+                    break;
+
+                case "6":
+                    Environment.Exit(0);
+                    break;
+
+                default:
+                    UserInterface.InvalidOperationMessage();
+                    break;
             }
         }
     }
