@@ -10,6 +10,6 @@ namespace PhoneBook
 
         void ShowNumberForContact();
 
-        void ShowContactNameForProvidedNumber(string contactNumber);
+        void ShowContactNameForProvidedNumber();
     }
 }

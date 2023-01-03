@@ -44,20 +44,17 @@
             ReturnToMainMenu();
         }
 
-        public void ShowContactNameForProvidedNumber(string number)
+        public void ShowContactNameForProvidedNumber()
         {
-            if (string.IsNullOrEmpty(number))
-            {
-                Console.WriteLine("Please provide number");
-                Console.WriteLine();
-                return;
-            }
+            Console.Clear();
+            Console.WriteLine("Searching for name\n");
+            var number = HandleEmptyInput(UserInterface.AskForNumber);
 
             var contact = Contacts.FirstOrDefault(c => c.Key == number);
             if (contact.Key == null)
             {
-                Console.WriteLine("No contact for the given number");
-                Console.WriteLine();
+                Console.WriteLine("\nNo contact for the given number");
+                ReturnToMainMenu();
                 return;
             }
 
@@ -113,14 +110,10 @@
                     break;
 
                 case "4":
-                    ShowContactNameForProvidedNumber(UserInterface.AskForNumber());
+                    ShowContactNameForProvidedNumber();
                     break;
 
                 case "5":
-                    UserInterface.ClearScreen();
-                    break;
-
-                case "6":
                     Environment.Exit(0);
                     break;
 
