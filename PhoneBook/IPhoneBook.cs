@@ -8,7 +8,7 @@ namespace PhoneBook
 
         void AddContact();
 
-        void ShowNumberForContact(string contactName);
+        void ShowNumberForContact();
 
         void ShowContactNameForProvidedNumber(string contactNumber);
     }

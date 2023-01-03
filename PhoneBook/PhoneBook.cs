@@ -16,7 +16,7 @@
         {
             Console.Clear();
             Console.WriteLine("Adding new contact");
-            var name = UserInterface.AskForname();
+            var name = UserInterface.AskForName();
             var phoneNumber = UserInterface.AskForNumber();
             var newContact = new Contact(name, phoneNumber);
             Contacts.Add(phoneNumber, newContact);
@@ -65,27 +65,29 @@
             Console.WriteLine();
         }
 
-        public void ShowNumberForContact(string contactName)
+        public void ShowNumberForContact()
         {
-            if (string.IsNullOrEmpty(contactName))
+            Console.Clear();
+            Console.WriteLine("Searching for contact\n");
+            var contactName = string.Empty;
+            while (string.IsNullOrEmpty(contactName))
             {
-                Console.WriteLine("Please provide name");
-                Console.WriteLine();
-                return;
+                contactName = UserInterface.AskForName();
             }
 
             bool notFound = true;
             foreach (var contact in Contacts.Where(c => c.Value.Name == contactName))
             {
-                Console.WriteLine($"Phone number for {contactName} is {contact.Key}\n");
+                Console.WriteLine($"\nPhone number for {contactName} is {contact.Key}\n");
                 notFound = false;
             }
 
             if (notFound)
             {
-                Console.WriteLine($"No contact for {contactName}");
-                Console.WriteLine();
+                Console.WriteLine($"\nNo contact for {contactName}\n");
             }
+
+            ReturnToMainMenu();
         }
 
         public static void ReturnToMainMenu()
@@ -107,7 +109,7 @@
                     break;
 
                 case "3":
-                    ShowNumberForContact(UserInterface.AskForNumber());
+                    ShowNumberForContact();
                     break;
 
                 case "4":

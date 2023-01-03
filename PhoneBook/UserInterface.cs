@@ -16,7 +16,7 @@
             Console.Write("Choose your action: ");
         }
 
-        internal static string AskForname()
+        internal static string AskForName()
         {
             Console.Write("Please provide Name: ");
             return Console.ReadLine();
