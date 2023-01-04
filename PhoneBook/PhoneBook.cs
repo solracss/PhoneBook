@@ -18,9 +18,17 @@
             Console.WriteLine(" ***** Adding new contact *****\n");
             var name = UserInterface.AskForName();
             var phoneNumber = UserInterface.AskForNumber();
-            var newContact = new Contact(name, phoneNumber);
-            Contacts.Add(phoneNumber, newContact);
-            Console.WriteLine($"\n New contact is \"{name}\" with number \"{phoneNumber}\"");
+            if (Contacts.ContainsKey(phoneNumber))
+            {
+                Console.WriteLine(" Number already in phonebook");
+            }
+            else
+            {
+                var newContact = new Contact(name, phoneNumber);
+                Contacts.Add(phoneNumber, newContact);
+                Console.WriteLine($"\n New contact is \"{name}\" with number \"{phoneNumber}\"");
+            }
+
             ReturnToMainMenu();
         }
 

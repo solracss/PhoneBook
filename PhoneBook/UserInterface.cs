@@ -1,4 +1,6 @@
-﻿namespace PhoneBook
+﻿using System.Text.RegularExpressions;
+
+namespace PhoneBook
 {
     internal static class UserInterface
     {
@@ -32,13 +34,17 @@
 
         internal static string AskForNumber()
         {
-            Console.Write(" Please provide Number: ");
-            return Console.ReadLine();
-        }
-
-        internal static void ClearScreen()
-        {
-            Console.Clear();
+            var regex = new Regex(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3,7})$");
+            Console.Write("\n Please provide Number ");
+            Console.Write("(Accepting only \"0-9\" \".\" \"-\"): ");
+            var number = Console.ReadLine();
+            bool isMatch = regex.IsMatch(number);
+            while (!regex.IsMatch(number))
+            {
+                Console.Write(" Wrong format, please provide valid number: ");
+                number = Console.ReadLine();
+            }
+            return number;
         }
 
         internal static void InvalidOperationMessage()
