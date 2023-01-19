@@ -50,7 +50,8 @@ namespace PhoneBook
         internal static void InvalidOperationMessage()
         {
             Console.WriteLine("\n Invalid operation");
-            PhoneBook.ReturnToMainMenu();
+            Console.Write("\n Press any key to return to Main Menu...");
+            Console.ReadKey();
         }
     }
 }
