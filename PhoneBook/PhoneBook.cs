@@ -2,14 +2,14 @@
 {
     internal class PhoneBook : IPhoneBook
     {
-        private Dictionary<string, Contact> _contacts = new Dictionary<string, Contact>()
-        {
-        };
+        private Dictionary<string, Contact> contacts { get; }
 
-        public Dictionary<string, Contact> Contacts
+        public PhoneBook()
         {
-            get { return _contacts; }
-            set { _contacts = value; }
+            contacts = new Dictionary<string, Contact>()
+            {
+                { "123456789", new Contact("James", "123456789") }
+            };
         }
 
         public void AddContact()
@@ -18,14 +18,14 @@
             Console.WriteLine(" ***** Adding new contact *****\n");
             var name = UserInterface.AskForName();
             var phoneNumber = UserInterface.AskForNumber();
-            if (Contacts.ContainsKey(phoneNumber))
+            if (contacts.ContainsKey(phoneNumber))
             {
                 Console.WriteLine(" Number already in phonebook");
             }
             else
             {
                 var newContact = new Contact(name, phoneNumber);
-                Contacts.Add(phoneNumber, newContact);
+                contacts.Add(phoneNumber, newContact);
                 Console.WriteLine($"\n New contact is \"{name}\" with number \"{phoneNumber}\"");
             }
 
@@ -36,14 +36,14 @@
         {
             Console.Clear();
             Console.WriteLine(" *****List of contacts in phonebook *****\n");
-            if (Contacts.Count == 0)
+            if (contacts.Count == 0)
             {
                 Console.WriteLine(" Phonebook is empty");
             }
             else
             {
                 var i = 1;
-                foreach (var contact in Contacts)
+                foreach (var contact in contacts)
                 {
                     Console.WriteLine($" {i}.\t{contact.Value.Name} {contact.Value.PhoneNumber}");
                     i++;
@@ -59,7 +59,7 @@
             Console.WriteLine(" ***** Searching for name *****\n");
             var number = HandleEmptyInput(UserInterface.AskForNumber);
 
-            var contact = Contacts.FirstOrDefault(c => c.Key == number);
+            var contact = contacts.FirstOrDefault(c => c.Key == number);
             if (contact.Key == null)
             {
                 Console.WriteLine("\n No contact for the given number");
@@ -78,7 +78,7 @@
             var contactName = HandleEmptyInput(UserInterface.AskForName);
 
             bool notFound = true;
-            foreach (var contact in Contacts.Where(c => c.Value.Name == contactName))
+            foreach (var contact in contacts.Where(c => c.Value.Name == contactName))
             {
                 Console.WriteLine($"\n Phone number for \"{contactName}\" is \"{contact.Key}\"");
                 notFound = false;
@@ -107,36 +107,6 @@
         {
             Console.Write("\n Press any key to return to Main Menu...");
             Console.ReadKey();
-        }
-
-        public void Run(string userInput)
-        {
-            switch (userInput)
-            {
-                case "1":
-                    AddContact();
-                    break;
-
-                case "2":
-                    ShowAllContacts();
-                    break;
-
-                case "3":
-                    ShowNumberForContact();
-                    break;
-
-                case "4":
-                    ShowContactNameForProvidedNumber();
-                    break;
-
-                case "5":
-                    Environment.Exit(0);
-                    break;
-
-                default:
-                    UserInterface.InvalidOperationMessage();
-                    break;
-            }
         }
     }
 }
