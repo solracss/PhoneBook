@@ -4,8 +4,7 @@
     {
         private static void Main(string[] args)
         {
-            var uih = new UserInputHandler();
-            var phoneBook = new PhoneBook(uih);
+            var phoneBook = new PhoneBookManager(new PhoneBook());
             while (true)
             {
                 UserInterface.ShowMainMenu();

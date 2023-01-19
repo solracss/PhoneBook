@@ -1,42 +1,112 @@
 ﻿namespace PhoneBook
 {
-    internal class PhoneBook
+    internal class PhoneBook : IPhoneBook
     {
-        private IPhoneBook phoneBook;
+        private Dictionary<string, Contact> contacts { get; }
 
-        public PhoneBook(IPhoneBook phoneBook)
+        public PhoneBook()
         {
-            this.phoneBook = phoneBook;
+            contacts = new Dictionary<string, Contact>()
+            {
+                { "123456789", new Contact("James", "123456789") }
+            };
         }
 
-        public void Run(string userInput)
+        public void AddContact()
         {
-            switch (userInput)
+            Console.Clear();
+            Console.WriteLine(" ***** Adding new contact *****\n");
+            var name = UserInterface.AskForName();
+            var phoneNumber = UserInterface.AskForNumber();
+            if (contacts.ContainsKey(phoneNumber))
             {
-                case "1":
-                    phoneBook.AddContact();
-                    break;
-
-                case "2":
-                    phoneBook.ShowAllContacts();
-                    break;
-
-                case "3":
-                    phoneBook.ShowNumberForContact();
-                    break;
-
-                case "4":
-                    phoneBook.ShowContactNameForProvidedNumber();
-                    break;
-
-                case "5":
-                    Environment.Exit(0);
-                    break;
-
-                default:
-                    UserInterface.InvalidOperationMessage();
-                    break;
+                Console.WriteLine(" Number already in phonebook");
             }
+            else
+            {
+                var newContact = new Contact(name, phoneNumber);
+                contacts.Add(phoneNumber, newContact);
+                Console.WriteLine($"\n New contact is \"{name}\" with number \"{phoneNumber}\"");
+            }
+
+            ReturnToMainMenu();
+        }
+
+        public void ShowAllContacts()
+        {
+            Console.Clear();
+            Console.WriteLine(" *****List of contacts in phonebook *****\n");
+            if (contacts.Count == 0)
+            {
+                Console.WriteLine(" Phonebook is empty");
+            }
+            else
+            {
+                var i = 1;
+                foreach (var contact in contacts)
+                {
+                    Console.WriteLine($" {i}.\t{contact.Value.Name} {contact.Value.PhoneNumber}");
+                    i++;
+                }
+            }
+
+            ReturnToMainMenu();
+        }
+
+        public void ShowContactNameForProvidedNumber()
+        {
+            Console.Clear();
+            Console.WriteLine(" ***** Searching for name *****\n");
+            var number = HandleEmptyInput(UserInterface.AskForNumber);
+
+            var contact = contacts.FirstOrDefault(c => c.Key == number);
+            if (contact.Key == null)
+            {
+                Console.WriteLine("\n No contact for the given number");
+                ReturnToMainMenu();
+                return;
+            }
+
+            Console.WriteLine($"\n Contact name for number \"{number}\" is \"{contact.Value.Name}\"");
+            ReturnToMainMenu();
+        }
+
+        public void ShowNumberForContact()
+        {
+            Console.Clear();
+            Console.WriteLine(" ***** Searching for contact *****\n");
+            var contactName = HandleEmptyInput(UserInterface.AskForName);
+
+            bool notFound = true;
+            foreach (var contact in contacts.Where(c => c.Value.Name == contactName))
+            {
+                Console.WriteLine($"\n Phone number for \"{contactName}\" is \"{contact.Key}\"");
+                notFound = false;
+            }
+
+            if (notFound)
+            {
+                Console.WriteLine($"\n No contact for \"{contactName}\"");
+            }
+
+            ReturnToMainMenu();
+        }
+
+        private static string HandleEmptyInput(Func<string> askForInput)
+        {
+            var str = string.Empty;
+            while (string.IsNullOrEmpty(str))
+            {
+                str = askForInput();
+            }
+
+            return str;
+        }
+
+        public static void ReturnToMainMenu()
+        {
+            Console.Write("\n Press any key to return to Main Menu...");
+            Console.ReadKey();
         }
     }
 }
