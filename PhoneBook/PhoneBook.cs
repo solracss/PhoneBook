@@ -77,16 +77,16 @@
             Console.WriteLine(" ***** Searching for contact *****\n");
             var contactName = HandleEmptyInput(UserInterface.AskForName);
 
-            bool notFound = true;
-            foreach (var contact in contacts.Where(c => c.Value.Name == contactName))
-            {
-                Console.WriteLine($"\n Phone number for \"{contactName}\" is \"{contact.Key}\"");
-                notFound = false;
-            }
-
-            if (notFound)
+            if (!contacts.Any(c => c.Value.Name == contactName))
             {
                 Console.WriteLine($"\n No contact for \"{contactName}\"");
+            }
+            else
+            {
+                foreach (var contact in contacts.Where(c => c.Value.Name == contactName))
+                {
+                    Console.WriteLine($"\n Phone number for \"{contactName}\" is \"{contact.Key}\"");
+                }
             }
 
             ReturnToMainMenu();
